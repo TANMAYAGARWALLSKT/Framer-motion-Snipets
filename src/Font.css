@@ -1,0 +1,99 @@
+/* fonts.css */
+
+/* Geist Font - Regular Weight */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist/Geist-Regular.woff2") format("woff2"),
+    url("/fonts/geist/Geist-Regular.woff") format("woff"),
+    url("/fonts/geist/Geist-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Font - Light Weight */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist/Geist-Light.woff2") format("woff2"),
+    url("/fonts/geist/Geist-Light.woff") format("woff"),
+    url("/fonts/geist/Geist-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Font - Medium Weight */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist/Geist-Medium.woff2") format("woff2"),
+    url("/fonts/geist/Geist-Medium.woff") format("woff"),
+    url("/fonts/geist/Geist-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Font - SemiBold Weight */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist/Geist-SemiBold.woff2") format("woff2"),
+    url("/fonts/geist/Geist-SemiBold.woff") format("woff"),
+    url("/fonts/geist/Geist-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Font - Bold Weight */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist/Geist-Bold.woff2") format("woff2"),
+    url("/fonts/geist/Geist-Bold.woff") format("woff"),
+    url("/fonts/geist/Geist-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Geist Font - Black Weight (if available) */
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/geist/Geist-Black.woff2") format("woff2"),
+    url("/fonts/geist/Geist-Black.woff") format("woff"),
+    url("/fonts/geist/Geist-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Optional: Geist Mono (if included in your zip) */
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/geist/GeistMono-Regular.woff2") format("woff2"),
+    url("/fonts/geist/GeistMono-Regular.woff") format("woff"),
+    url("/fonts/geist/GeistMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/geist/GeistMono-Bold.woff2") format("woff2"),
+    url("/fonts/geist/GeistMono-Bold.woff") format("woff"),
+    url("/fonts/geist/GeistMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Add global font application if desired */
+body {
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+}
+
+code,
+pre {
+  font-family: "Geist Mono", monospace;
+}
