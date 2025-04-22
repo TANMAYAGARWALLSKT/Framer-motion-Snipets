@@ -1,1 +1,17 @@
 @import "tailwindcss";
+/* The main scrollbar */
+.CodeScrollbar::-webkit-scrollbar {
+  width: 2px; /* Width for vertical scrollbar */
+  height: 2px; /* Height for horizontal scrollbar */
+}
+
+/* The draggable scrolling handle */
+.CodeScrollbar::-webkit-scrollbar-thumb {
+  background-color: #36454f;
+  border-radius: 4px;
+}
+
+/* The track (progress bar) of the scrollbar */
+.CodeScrollbar::-webkit-scrollbar-track {
+  background: rgba(182, 129, 129, 0.062);
+}

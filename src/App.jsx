@@ -1,213 +1,85 @@
-import React from "react";
-import { Location, Projects, Directors } from "../public/Data";
-import { delay, motion } from "framer-motion"; // Corrected import - animate is not needed as import
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { NavTitle } from "./LibData.js";
+import Parentmain from "./Parentmain.jsx";
 
 function App() {
-  const Data = [
-    {
-      src: "pic2.jpg",
-      delay: "0.3",
-      initial: { x: -150, opacity: 0.5 },
-      animate: { x: 0, opacity: 1 }, // Fixed animation target
-    },
-    {
-      src: "pic3.jpg",
-      delay: "0.4",
-      initial: { y: -150, opacity: 0.5 },
-      animate: { y: 0, opacity: 1 }, // Added animate property
-    },
-    {
-      src: "pic4.jpg",
-      delay: "0.2",
-      initial: { x: -150, opacity: 0.5 },
-      animate: { x: 0, opacity: 1 }, // Fixed animation target
-    },
-    {
-      src: "pic5.jpg",
-      delay: "0.4",
-      initial: { y: -150, opacity: 0.5 },
-      animate: { y: 0, opacity: 1 }, // Fixed animation target
-    },
-    {
-      src: "pic6.jpg",
-      delay: "0.5",
-      initial: { x: -150, opacity: 0.5 },
-      animate: { x: 0, opacity: 1 }, // Fixed animation target
-    },
-    {
-      src: "pic7.jpg",
-      delay: "0.2",
-      initial: { y: -150, opacity: 0.5 },
-      animate: { y: 0, opacity: 1 }, // Fixed animation target
-    },
-    {
-      src: "pic8.jpg",
-      delay: "0.1",
-      initial: { x: -150, opacity: 0.5 },
-      animate: { x: 0, opacity: 1 }, // Fixed animation target
-    },
-    {
-      src: "pic9.jpg",
-      delay: "0.3",
-      initial: { y: -150, opacity: 0.5 },
-      animate: { y: 0, opacity: 1 }, // Fixed animation target
-    },
-    {
-      src: "pic10.jpg",
-      delay: "0.5",
-      initial: { x: -150, opacity: 0.5 },
-      animate: { x: 0, opacity: 1 }, // Fixed animation target
-    },
-  ];
+  const [active, setactive] = useState("Button");
+  const [firstLoad, setFirstLoad] = useState(false);
 
-  // Container animation
-  const containerVariants = {
-    hidden: { opacity: 0.5 },
-    visible: {
-      opacity: 0.7,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.5,
-      },
-    },
-  };
+  // Turn off firstLoad after first render
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setFirstLoad(true);
+    }, 100); // you can tweak this delay
+    return () => clearTimeout(timeout);
+  }, []);
 
-  // Item animation
-  const itemVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-        type: "spring",
-      },
-    },
-  };
-
-  // Gallery container animation
-  const galleryVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  // Gallery item animation
-  const galleryItemVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: {
+  // Animation for first load
+  const firstLoadVariants = {
+    initial: { opacity: 0, scale: 0.95, y: 20 },
+    animate: {
       opacity: 1,
       scale: 1,
-      transition: {
-        duration: 0.5,
-        type: "spring",
-        stiffness: 100,
-      },
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
     },
+    exit: { opacity: 0 },
+  };
+
+  // Regular animation for text changes
+  const regularVariants = {
+    initial: { opacity: 0, y: 2 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.1 } },
+    exit: { opacity: 0, y: -2, transition: { duration: 0.1 } },
   };
 
   return (
-    <div className="font-geist bg-neutral-950 text-zinc-100 flex flex-col items-center justify-center w-screen h-screen overflow-hidden select-none">
-      <div className="flex flex-col lg:flex-row w-full h-full justify-around items-center text-center px-4">
-        {/* Left Column */}
-        <div className="w-full lg:w-1/4 h-full text-md font-semibold flex flex-row gap-5 items-center justify-center overflow-y-auto py-5">
-          <motion.div
-            className="w-full text-left"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <div className="font-bold text-lg opacity-55">Project</div>
-            <div className="flex flex-col pt-5">
-              {Projects.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
-                >
-                  {item}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            className="w-full text-right"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <div className="font-bold text-lg opacity-55">
-              Directors // Photographers
-            </div>
-            <div className="flex flex-col pt-5">
-              {Directors.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
-                >
-                  {item}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+    <div className="w-full text-[#F5F5F5] min-h-screen h-full bg-[#111111] flex">
+      {/* Sidebar */}
+      <div className="w-[15%] h-screen sticky top-0 left-0 border-r-1 py-5 px-5 shadow-xl shadow-white/20 border-amber-100/10 select-none">
+        <div className="Logo font-bold border-b-1 border-amber-50/20 pb-10 text-2xl text-shadow-lg text-shadow-amber-100/10 text-center flex justify-center items-center">
+          Some UI Lib
         </div>
 
-        {/* Middle Column - Images */}
-        <motion.div
-          className="flex flex-wrap gap-4 w-full lg:w-2/5 h-4/5 justify-center items-center py-5 overflow-y-auto"
-          variants={galleryVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {Data.map((item, index) => (
-            <motion.div
-              key={index}
-              className="w-1/4 aspect-square overflow-hidden rounded-md"
-              // variants={galleryItemVariants}
-            >
-              <motion.img
-                initial={item.initial}
-                animate={item.animate}
-                transition={{ duration: 0.5, delay: `${item.delay}` }}
-                src={`/images/${item.src}`}
-                alt={`Project image ${index + 1}`}
-                className="object-cover w-full h-full hover:scale-110 transition-transform duration-300"
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="flex justify-center items-start gap-1 flex-col py-4 font-semibold text-[#f5f5f5a5]">
+          <span className="text-[#F5F5F5] text-lg font-bold text-shadow-2xs text-shadow-amber-100/10">
+            All Components
+          </span>
 
-        {/* Right Column */}
-        <div className="w-full lg:w-1/4 h-full text-md font-semibold flex flex-col gap-5 items-start justify-center overflow-y-auto py-5">
-          <motion.div
-            className="font-bold text-lg opacity-55"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            Project Locations
-          </motion.div>
-          <motion.div
-            className="flex flex-col items-start"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {Location.map((item, index) => (
-              <motion.h1 key={index} variants={itemVariants}>
-                {item}
-              </motion.h1>
+          <div className="flex flex-col gap-1 justify-center items-start border-l-1 border-white/20 pl-2">
+            {NavTitle.map((Item) => (
+              <span
+                key={Item.title}
+                onClick={() => setactive(Item.title)}
+                className={`pl-2 cursor-pointer transition-all duration-200 hover:scale-110 ${
+                  active === Item.title
+                    ? "text-[#F5F5F5] font-bold  border-l-white border-white/5 hover:scale-110 shadow-xl bg-white/5 backdrop-blur-5xl shadow-white/10  overflow-hidden border-l-3 pr-10"
+                    : "font-light"
+                }`}
+              >
+                {Item.title}
+              </span>
             ))}
-          </motion.div>
+          </div>
         </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex-1 p-10">
+        <AnimatePresence mode="wait">
+          <motion.h1
+            key={active}
+            variants={firstLoad ? firstLoadVariants : regularVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="text-4xl font-bold text-white border-b-1 backdrop-blur-2xl  border-white/20 pb-2"
+          >
+            {active}
+          </motion.h1>
+          <Parentmain active={active} />
+        </AnimatePresence>
       </div>
     </div>
   );
